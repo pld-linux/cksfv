@@ -26,7 +26,7 @@ upewnienia siê o poprawnym przesyle danych poprzez sieæ.
 %patch0 -p1
 
 %build
-%{__make} CFLAGS="%{rpmcflags}" -C src
+%{__make} CFLAGS="%{rpmcflags}" VERSION=%{version} -C src
 
 %install
 rm -rf $RPM_BUILD_ROOT

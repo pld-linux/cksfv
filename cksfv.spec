@@ -1,5 +1,5 @@
-Summary:	Test archives using information from .sfv.
-Summary(pl):	Testuje archiwa u¿ywaj±c infomacji z .sfv.
+Summary:	Test archives using information from .sfv
+Summary(pl):	Testuje archiwa u¿ywaj±c infomacji z .sfv
 Name:		cksfv
 Version:	1.2
 Release:	1
@@ -17,14 +17,14 @@ Utility to test .sfv files. These files are commonly used to ensure
 the correct retrieval or storage of data.
 
 %description -l pl
-Narzêdzie do testowania plików .sfv. Te pliki s± czêsto u¿ywane
-w celu upewnienia siê o poprawnym przesyle danych poprzez sieæ.
+Narzêdzie do testowania plików .sfv. Te pliki s± czêsto u¿ywane w celu
+upewnienia siê o poprawnym przesyle danych poprzez sieæ.
 
 %prep
 %setup -q
 
 %build
-%{__make} CFLAGS="$RPM_OPT_FLAGS" -C src
+%{__make} CFLAGS="%{rpmcflags}" -C src
 
 %install
 rm -rf $RPM_BUILD_ROOT

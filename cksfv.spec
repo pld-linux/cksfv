@@ -8,6 +8,7 @@ Group:		Applications/Archiving
 Vendor:		Bryan Call <bc@fodder.org>
 URL:		http://www.fodder.org/cksfv/
 Source0:	http://www.fodder.org/cksfv/%{name}-%{version}.tar.gz
+# Source0-md5:	e00cf6a80a566539eb6f3432f2282c38
 Patch0:		%{name}-alpha.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

@@ -1,8 +1,8 @@
 Summary:	Test archives using information from .sfv
 Summary(pl):	Testuje archiwa u¿ywaj±c infomacji z .sfv
 Name:		cksfv
-Version:	1.2
-Release:	2
+Version:	1.3
+Release:	1
 License:	GPL
 Group:		Applications/Archiving
 Group(de):	Applikationen/Archivierung

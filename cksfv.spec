@@ -5,8 +5,6 @@ Version:	1.3
 Release:	1
 License:	GPL
 Group:		Applications/Archiving
-Group(de):	Applikationen/Archivierung
-Group(pl):	Aplikacje/Archiwizacja
 Vendor:		Bryan Call <bc@fodder.org>
 URL:		http://www.fodder.org/cksfv/
 Source0:	http://www.fodder.org/cksfv/%{name}-%{version}.tar.gz

@@ -63,18 +63,24 @@ diff -ur cksfv-1.2/src/newsfv.c cksfv-1.2.64/src/newsfv.c
 diff -ur cksfv-1.2/src/print.c cksfv-1.2.64/src/print.c
 --- cksfv-1.2/src/print.c	Fri Dec 29 01:34:33 2000
 +++ cksfv-1.2.64/src/print.c	Fri Oct 12 16:18:43 2001
-@@ -58,7 +58,11 @@
+@@ -58,10 +58,17 @@
    }
  }
  
 +#ifdef __alpha__
 +void pcrc(char *fn, unsigned int val)
++{
++  printf("%s %.8X\n", fn, val);
++}
 +#else
  void pcrc(char *fn, unsigned long val)
-+#endif
  {
    printf("%s %.8lX\n", fn, val);
  }
++#endif
+ 
+ void prsfv_head(char *fn)
+ {
 diff -ur cksfv-1.2/src/readsfv.c cksfv-1.2.64/src/readsfv.c
 --- cksfv-1.2/src/readsfv.c	Fri Dec 29 01:34:33 2000
 +++ cksfv-1.2.64/src/readsfv.c	Fri Oct 12 16:19:31 2001

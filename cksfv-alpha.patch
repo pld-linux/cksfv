@@ -1,0 +1,104 @@
+diff -ur cksfv-1.2/src/crc32.c cksfv-1.2.64/src/crc32.c
+--- cksfv-1.2/src/crc32.c	Fri Dec 29 01:34:33 2000
++++ cksfv-1.2.64/src/crc32.c	Fri Oct 12 16:15:29 2001
+@@ -23,7 +23,11 @@
+ 
+ #define BUFFERSIZE 16384   /* (16k) buffer size for reading from the file */
+ 
++#ifdef __alpha__
++static const unsigned int crctable[256] = {
++#else
+ static const unsigned long crctable[256] = {
++#endif
+   0x00000000, 0x77073096, 0xee0e612c, 0x990951ba,
+   0x076dc419, 0x706af48f, 0xe963a535, 0x9e6495a3,
+   0x0edb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988,
+@@ -91,11 +95,19 @@
+ };
+ 
+ 
++#ifdef __alpha__
++int crc32(register int fd, unsigned int *main_val, unsigned int *main_len)
++#else
+ int crc32(register int fd, unsigned long *main_val, unsigned long *main_len)
++#endif
+ {
+   char                  buf[BUFFERSIZE], *p;
+   int                   len = 0, nr;
++#ifdef __alpha__
++  unsigned int         crc = ~0, crc32_total = ~0;
++#else
+   unsigned long         crc = ~0, crc32_total = ~0;
++#endif
+ 	
+   while ((nr = read(fd, buf, sizeof(buf))) > 0)
+     for (len += nr, p = buf; nr--; ++p) {
+diff -ur cksfv-1.2/src/newsfv.c cksfv-1.2.64/src/newsfv.c
+--- cksfv-1.2/src/newsfv.c	Fri Dec 29 01:34:33 2000
++++ cksfv-1.2.64/src/newsfv.c	Fri Oct 12 16:18:11 2001
+@@ -24,14 +24,23 @@
+ 
+ extern void pnsfv_head();
+ extern void pfileinfo(char**);
++#ifdef __alpha__
++extern void pcrc(char*, unsigned int);
++extern int  crc32(int, unsigned int*, unsigned int*);
++#else
+ extern void pcrc(char*, unsigned long);
+ extern int  crc32(int, unsigned long*, unsigned long*);
++#endif
+ 
+ int newsfv(char **argv)
+ {
+   int           fd, rval = 0;
+   char          *fn;
++#ifdef __alpha__
++  unsigned int len, val;
++#else
+   unsigned long len, val;
++#endif
+   
+   pnsfv_head();
+   pfileinfo(argv);
+diff -ur cksfv-1.2/src/print.c cksfv-1.2.64/src/print.c
+--- cksfv-1.2/src/print.c	Fri Dec 29 01:34:33 2000
++++ cksfv-1.2.64/src/print.c	Fri Oct 12 16:18:43 2001
+@@ -58,7 +58,11 @@
+   }
+ }
+ 
++#ifdef __alpha__
++void pcrc(char *fn, unsigned int val)
++#else
+ void pcrc(char *fn, unsigned long val)
++#endif
+ {
+   printf("%s %.8lX\n", fn, val);
+ }
+diff -ur cksfv-1.2/src/readsfv.c cksfv-1.2.64/src/readsfv.c
+--- cksfv-1.2/src/readsfv.c	Fri Dec 29 01:34:33 2000
++++ cksfv-1.2.64/src/readsfv.c	Fri Oct 12 16:19:31 2001
+@@ -28,7 +28,11 @@
+ #include <dirent.h>
+ #include <stdlib.h>
+ 
++#ifdef __alpha__
++extern int  crc32(int, unsigned int*, unsigned int*);
++#else
+ extern int  crc32(int, unsigned long*, unsigned long*);
++#endif
+ extern void prsfv_head(char*);
+ 
+ int find_file(char*, char*);
+@@ -39,7 +43,11 @@
+   FILE          *fd;
+   char          buf[512], *end, filename[512], crc[9], path[256];
+   int           file, rval = 0;
++#ifdef __alpha__
++  unsigned int len, val, sfvcrc;
++#else
+   unsigned long len, val, sfvcrc;
++#endif
+   
+   if (quiet == 0) {
+     prsfv_head(fn);

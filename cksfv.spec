@@ -1,15 +1,14 @@
 Summary:	Test archives using information from .sfv
 Summary(pl):	Testowanie archiwów z u¿yciem informacji z plików .sfv
 Name:		cksfv
-Version:	1.3
-Release:	3
+Version:	1.3.2
+Release:	1
 License:	GPL
 Vendor:		Bryan Call <bc@fodder.org>
 Group:		Applications/Archiving
-Source0:	http://www.fodder.org/cksfv/%{name}-%{version}.tar.gz
-# Source0-md5:	e00cf6a80a566539eb6f3432f2282c38
-Patch0:		%{name}-LFS.patch
-URL:		http://www.fodder.org/cksfv/
+Source0:	http://www.modeemi.fi/~shd/foss/cksfv/files/%{name}-%{version}.tar.bz2
+# Source0-md5:	e24b27c2f4ae36c1223b6be846ec98db
+URL:		http://www.modeemi.fi/~shd/foss/cksfv/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -22,18 +21,19 @@ upewnienia siê o poprawnym przesyle danych poprzez sieæ.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%{__make} -C src \
-	CFLAGS="%{rpmcflags} -D_LARGEFILE64_SOURCE" \
-	VERSION=%{version}
+./configure \
+	--prefix=/usr \
+	--package-prefix=$RPM_BUILD_ROOT
+
+%{__make} \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
 
-install src/cksfv $RPM_BUILD_ROOT%{_bindir}
+%{__make} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -42,3 +42,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/*
+%{_mandir}/man1/*

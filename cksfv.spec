@@ -2,14 +2,15 @@ Summary:	Test archives using information from .sfv
 Summary(pl):	Testuje archiwa u¿ywaj±c infomacji z .sfv
 Name:		cksfv
 Version:	1.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Applications/Archiving
 Group(de):	Applikationen/Archivierung
 Group(pl):	Aplikacje/Archiwizacja
 Vendor:		Bryan Call <bc@fodder.org>
-Source0:	http://www.fodder.org/cksfv/%{name}-%{version}.tar.gz
 URL:		http://www.fodder.org/cksfv/
+Source0:	http://www.fodder.org/cksfv/%{name}-%{version}.tar.gz
+Patch0:		%{name}-alpha.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -22,6 +23,7 @@ upewnienia siê o poprawnym przesyle danych poprzez sieæ.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__make} CFLAGS="%{rpmcflags}" -C src

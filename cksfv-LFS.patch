@@ -1,0 +1,41 @@
+diff -ur cksfv-1.3.orig/src/Makefile cksfv-1.3/src/Makefile
+--- cksfv-1.3.orig/src/Makefile	2001-07-06 08:33:08.000000000 +0200
++++ cksfv-1.3/src/Makefile	2004-02-04 23:22:15.000000000 +0100
+@@ -17,7 +17,7 @@
+ # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ 
+ PROG=		cksfv
+-CFLAGS+=	-Wall -Werror -O2 -g
++CFLAGS+=	-Wall -Werror -O2 -g -D_LARGEFILE64_SOURCE
+ SRCS=		cksfv.c print.c crc32.c readsfv.c newsfv.c
+ 
+ cksfv: $(SRCS)
+diff -ur cksfv-1.3.orig/src/newsfv.c cksfv-1.3/src/newsfv.c
+--- cksfv-1.3.orig/src/newsfv.c	2004-02-04 23:14:26.000000000 +0100
++++ cksfv-1.3/src/newsfv.c	2004-02-04 23:22:38.000000000 +0100
+@@ -47,7 +47,7 @@
+   
+   while (*argv) {
+     fn = *argv++;
+-    if ((fd = open(fn, O_RDONLY, 0)) < 0) {
++    if ((fd = open(fn, O_RDONLY|O_LARGEFILE, 0)) < 0) {
+       fprintf(stderr, "cksfv: %s: %s\n", fn, strerror(errno)); 
+       rval = 1;
+       continue;
+diff -ur cksfv-1.3.orig/src/readsfv.c cksfv-1.3/src/readsfv.c
+--- cksfv-1.3.orig/src/readsfv.c	2004-02-04 23:14:26.000000000 +0100
++++ cksfv-1.3/src/readsfv.c	2004-02-04 23:22:53.000000000 +0100
+@@ -87,11 +87,11 @@
+       snprintf(path, 256, "%s/%s", dir, filename);
+ 
+       /* can we open the file */
+-      if ((file = open(filename, O_RDONLY, 0)) < 0) {
++      if ((file = open(filename, O_RDONLY|O_LARGEFILE, 0)) < 0) {
+         if (nocase == 1) {
+           /* try to search for it if ingore case is set */
+           find_file(filename, dir);
+-          file = open(filename, O_RDONLY, 0);
++          file = open(filename, O_RDONLY|O_LARGEFILE, 0);
+         }
+       }
+ 

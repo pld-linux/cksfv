@@ -32,12 +32,10 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 
 install src/cksfv $RPM_BUILD_ROOT%{_bindir}
 
-gzip -9nf ChangeLog README TODO
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/*

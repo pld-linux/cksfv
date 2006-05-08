@@ -27,7 +27,7 @@ upewnienia siê o poprawnym przesyle danych poprzez sieæ.
 	--prefix=/usr \
 	--package-prefix=$RPM_BUILD_ROOT
 
-%{__make} \
+%{__make} all check \
 	CFLAGS="%{rpmcflags}"
 
 %install

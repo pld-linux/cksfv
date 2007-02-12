@@ -1,5 +1,5 @@
 Summary:	Test archives using information from .sfv
-Summary(pl.UTF-8):   Testowanie archiwów z użyciem informacji z plików .sfv
+Summary(pl.UTF-8):	Testowanie archiwów z użyciem informacji z plików .sfv
 Name:		cksfv
 Version:	1.3.9
 Release:	1

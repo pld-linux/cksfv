@@ -1,5 +1,5 @@
 Summary:	Test archives using information from .sfv
-Summary(pl):	Testowanie archiwów z u¿yciem informacji z plików .sfv
+Summary(pl.UTF-8):   Testowanie archiwÃ³w z uÅ¼yciem informacji z plikÃ³w .sfv
 Name:		cksfv
 Version:	1.3.9
 Release:	1
@@ -15,9 +15,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Utility to test .sfv files. These files are commonly used to ensure
 the correct retrieval or storage of data.
 
-%description -l pl
-Narzêdzie do testowania plików .sfv. Te pliki s± czêsto u¿ywane w celu
-upewnienia siê o poprawnym przesyle danych poprzez sieæ.
+%description -l pl.UTF-8
+NarzÄ™dzie do testowania plikÃ³w .sfv. Te pliki sÄ… czÄ™sto uÅ¼ywane w celu
+upewnienia siÄ™ o poprawnym przesyle danych poprzez sieÄ‡.
 
 %prep
 %setup -q

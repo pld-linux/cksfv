@@ -1,13 +1,13 @@
 Summary:	Test archives using information from .sfv
 Summary(pl.UTF-8):	Testowanie archiwów z użyciem informacji z plików .sfv
 Name:		cksfv
-Version:	1.3.10
+Version:	1.3.11
 Release:	1
 License:	GPL
 Vendor:		Bryan Call <bc@fodder.org>
 Group:		Applications/Archiving
 Source0:	http://zakalwe.virtuaalipalvelin.net/~shd/foss/cksfv/files/%{name}-%{version}.tar.bz2
-# Source0-md5:	8a7085cfd28f7fa20ca4c4842d954048
+# Source0-md5:	82ea906bc2362ae05e713e24e95a7544
 URL:		http://zakalwe.virtuaalipalvelin.net/~shd/foss/cksfv/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

@@ -1,37 +1,40 @@
 Summary:	Test archives using information from .sfv
-Summary(pl):	Testuje archiwa u¿ywaj±c infomacji z .sfv
+Summary(pl.UTF-8):	Testowanie archiwÃ³w z uÅ¼yciem informacji z plikÃ³w .sfv
 Name:		cksfv
-Version:	1.3
-Release:	3
+Version:	1.3.13
+Release:	1
 License:	GPL
-Group:		Applications/Archiving
 Vendor:		Bryan Call <bc@fodder.org>
-URL:		http://www.fodder.org/cksfv/
-Source0:	http://www.fodder.org/cksfv/%{name}-%{version}.tar.gz
-# Source0-md5:	e00cf6a80a566539eb6f3432f2282c38
-Patch0:		%{name}-LFS.patch
+Group:		Applications/Archiving
+Source0:	http://zakalwe.virtuaalipalvelin.net/~shd/foss/cksfv/files/%{name}-%{version}.tar.bz2
+# Source0-md5:	a6d7e4f2dc267e670ebb48eb8b806993
+URL:		http://zakalwe.virtuaalipalvelin.net/~shd/foss/cksfv/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Utility to test .sfv files. These files are commonly used to ensure
 the correct retrieval or storage of data.
 
-%description -l pl
-Narzêdzie do testowania plików .sfv. Te pliki s± czêsto u¿ywane w celu
-upewnienia siê o poprawnym przesyle danych poprzez sieæ.
+%description -l pl.UTF-8
+NarzÄ™dzie do testowania plikÃ³w .sfv. Te pliki sÄ… czÄ™sto uÅ¼ywane w celu
+upewnienia siÄ™ o poprawnym przesyle danych poprzez sieÄ‡.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-%{__make} CFLAGS="%{rpmcflags} -D_LARGEFILE64_SOURCE" VERSION=%{version} -C src
+./configure \
+	--prefix=/usr \
+	--package-prefix=$RPM_BUILD_ROOT
+
+%{__make} all check \
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_bindir}
 
-install src/cksfv $RPM_BUILD_ROOT%{_bindir}
+%{__make} install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -40,3 +43,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
 %attr(755,root,root) %{_bindir}/*
+%{_mandir}/man1/*

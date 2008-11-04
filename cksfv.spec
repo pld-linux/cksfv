@@ -2,7 +2,7 @@ Summary:	Test archives using information from .sfv
 Summary(pl.UTF-8):	Testowanie archiwów z użyciem informacji z plików .sfv
 Name:		cksfv
 Version:	1.3.13
-Release:	1.1
+Release:	2
 License:	GPL
 Vendor:		Bryan Call <bc@fodder.org>
 Group:		Applications/Archiving
@@ -29,7 +29,7 @@ upewnienia się o poprawnym przesyle danych poprzez sieć.
 
 %{__make} all check \
 	CC="%{__cc}" \
-	CFLAGS="%{rpmcflags}"
+	CFLAGS="%{rpmcflags} -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE"
 
 %install
 rm -rf $RPM_BUILD_ROOT

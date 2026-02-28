@@ -2,7 +2,7 @@ Summary:	Test archives using information from .sfv
 Summary(pl.UTF-8):	Testowanie archiwów z użyciem informacji z plików .sfv
 Name:		cksfv
 Version:	1.3.14
-Release:	1
+Release:	2
 License:	GPL
 Vendor:		Bryan Call <bc@fodder.org>
 Group:		Applications/Archiving
